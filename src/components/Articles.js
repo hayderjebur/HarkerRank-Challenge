@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-function Articles({ articles }) {
+function Articles({ articl }) {
+  console.log('this is Article from Article Component', articl);
   return (
     <div className='card w-50 mx-auto'>
-      {articles.map((art) => (
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Upvotes</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      {articl.map((art) => (
         <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Upvotes</th>
-              <th>Date</th>
-            </tr>
-          </thead>
           <tbody>
             <tr data-testid='article' key='article-index'>
               <td data-testid='article-title'>{art.title}</td>

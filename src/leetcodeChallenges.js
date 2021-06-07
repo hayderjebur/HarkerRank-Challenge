@@ -1,3 +1,70 @@
+string = 'abcdefghijklmnopqrstuvwxyz';
+//make an array 10 items [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+let x = Array.from(Array(10).keys());
+
+// expected output: 3
+const array1 = [1, 3, 2];
+console.log(Math.max(...array1));
+
+// Letter as Array
+alphabet = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
+//letter as object
+letterValue = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+  e: 5,
+  f: 6,
+  g: 7,
+  h: 8,
+  i: 9,
+  j: 10,
+  k: 11,
+  l: 12,
+  m: 13,
+  n: 14,
+  o: 15,
+  p: 16,
+  q: 17,
+  r: 18,
+  s: 19,
+  t: 20,
+  u: 21,
+  v: 22,
+  w: 23,
+  x: 24,
+  y: 25,
+  z: 26,
+};
+
 // 1480. Running Sum of 1d Array
 // Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
 // Return the running sum of nums.
@@ -160,4 +227,66 @@ var restoreString = function (s, indices) {
     letters[indices[i]] = s.charAt(i);
   }
   return letters.join('');
+};
+// 1221. Split a String in Balanced Strings
+// Balanced strings are those that have an equal quantity of 'L' and 'R' characters.
+// Given a balanced string s, split it in the maximum amount of balanced strings.
+// Return the maximum amount of split balanced strings.
+var balancedStringSplit = function (s) {
+  let result = 0,
+    countL = 0,
+    countR = 0;
+  for (let char of s) {
+    if (char === 'R') countR++;
+    if (char === 'L') countL++;
+    if (countR === countL) result++;
+  }
+  return result;
+};
+
+// Sliding Windiw Technique
+function arrayMaxConsecutiveSum(arr, num) {
+  let sum = 0;
+  let max = 0;
+
+  //loop k time to get sum value
+  for (let i = 0; i < k; i++) {
+    sum += arr[i];
+  }
+  //Init max from sum
+  max = sum;
+  //loop through arr and apply sliding window
+  for (let i = k; i < arr.length; i++) {
+    sum -= arr[i - k];
+    sum += arr[i];
+    // sum = sum - arr[i]+ arr[i+k]
+
+    if (sum > max) max = sum;
+  }
+  return max;
+}
+
+//Given an array nums of size n, return the majority element.
+//The majority element is the element that appears more than ⌊n / 2⌋ times.
+//You may assume that the majority element always exists in the array.
+var majorityElement = function (nums) {
+  let obj = {};
+  let max = 0;
+  let mj = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (obj[nums[i]] == undefined) {
+      obj[nums[i]] = 1;
+    } else {
+      obj[nums[i]] += 1;
+    }
+  }
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (value > max) {
+      max = value;
+      mj = key;
+    }
+  }
+
+  return mj;
 };

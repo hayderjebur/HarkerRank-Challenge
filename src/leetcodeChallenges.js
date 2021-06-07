@@ -265,7 +265,7 @@ function arrayMaxConsecutiveSum(arr, num) {
   }
   return max;
 }
-
+//169. Majority Element
 //Given an array nums of size n, return the majority element.
 //The majority element is the element that appears more than ⌊n / 2⌋ times.
 //You may assume that the majority element always exists in the array.
@@ -290,3 +290,5 @@ var majorityElement = function (nums) {
 
   return mj;
 };
+//136. Single Number
+//Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.

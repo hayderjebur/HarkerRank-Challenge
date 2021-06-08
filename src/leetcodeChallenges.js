@@ -65,22 +65,24 @@ letterValue = {
   z: 26,
 };
 
-// 1480. Running Sum of 1d Array
-// Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
-// Return the running sum of nums.
-// Input: nums = [1,2,3,4]
-// Output: [1,3,6,10]
-// Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
-
-//  * @param {number[]} nums
-//  * @return {number[]}
-
-var runningSum = function (nums) {
-  let arr = [nums[0]];
-  for (let i = 1; i < nums.length; i++) {
-    arr.push(nums[i] + arr[i - 1]);
+//Given a string s, return the first non-repeating character in it and return its
+// index. If it does not exist, return -1.
+var firstUniqChar = function (s) {
+  var map = new Map();
+  for (i = 0; i < s.length; i++) {
+    if (map.has(s[i])) {
+      map.set(s[i], 2);
+    } else {
+      map.set(s[i], 1);
+    }
   }
-  return arr;
+
+  for (i = 0; i < s.length; i++) {
+    if (map.has(s[i]) && map.get(s[i]) === 1) {
+      return i;
+    }
+  }
+  return -1;
 };
 
 // Given a valid (IPv4) IP address, return a defanged version of that IP address.
@@ -99,44 +101,6 @@ var defangIPaddr = function (address) {
     }
   }
   return str;
-};
-
-// Given the array candies and the integer extraCandies, where candies[i]
-//  represents the number of candies that the ith kid has.
-
-// For each kid check if there is a way to distribute extraCandies among the kids such that he or
-//  she can have the greatest number of candies among them.
-// Notice that multiple kids can have the greatest number of candies.
-var kidsWithCandies = function (candies, extraCandies) {
-  let max = candies[0];
-  let arr = [];
-
-  for (let i = 1; i < candies.length; i++) {
-    if (candies[i] > max) {
-      max = candies[i];
-    }
-  }
-  for (let j = 0; j < candies.length; j++) {
-    if (candies[j] + extraCandies >= max) {
-      arr.push(true);
-    } else {
-      arr.push(false);
-    }
-  }
-  return arr;
-};
-
-// Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
-// Return the array in the form [x1,y1,x2,y2,...,xn,yn].
-// Input: nums = [2,5,1,3,4,7], n = 3
-// Output: [2,3,5,4,1,7]
-var shuffle = function (nums, n) {
-  let arr = [];
-  for (let i = 0; i < (nums.length - 1) / 2; i++) {
-    arr.push(nums[i]);
-    arr.push(nums[i + n]);
-  }
-  return arr;
 };
 
 // Design a parking system for a parking lot. The parking lot has three kinds of parking spaces: big, medium, and small, with a fixed number of slots for each size.
@@ -171,50 +135,6 @@ ParkingSystem.prototype.addCar = function (carType) {
   } else return false;
 };
 
-// Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
-//That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
-// Return the answer in an array.
-// /**
-//  * @param {number[]} nums
-//  * @return {number[]}
-//  */
-var smallerNumbersThanCurrent = function (nums) {
-  let arr = [];
-  let count = 0;
-
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = 0; j < nums.length; j++) {
-      if (nums[i] > nums[j]) count++;
-    }
-    arr[i] = count;
-    count = 0;
-  }
-
-  return arr;
-};
-//1342. Number of Steps to Reduce a Number to Zero
-// Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even,
-// you have to divide it by 2, otherwise, you have to subtract 1 from it.Given a non-negative integer num, return the number of steps to reduce it to zero.
-// If the current number is even, you have to divide it by 2,
-//  otherwise, you have to subtract 1 from it.
-// /**
-//  * @param {number} num
-//  * @return {number}
-//  */
-var numberOfSteps = function (num) {
-  let count = 0;
-  while (num !== 0) {
-    if (num % 2 == 0) {
-      num = num / 2;
-      count++;
-    } else {
-      num--;
-      count++;
-    }
-  }
-  return count;
-};
-
 // 1528. Shuffle String
 // Given a string s and an integer array indices of the same length.
 // The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled string.
@@ -243,6 +163,31 @@ var balancedStringSplit = function (s) {
   }
   return result;
 };
+//242. Valid Anagram
+//Given two strings s and t,
+//return true if t is an anagram of s, and false otherwise.
+var isAnagram = function (s, t) {
+  const lookup = {};
+
+  for (let i = 0; i < first.length; i++) {
+    let letter = first[i];
+    lookup[letter] = lookup[letter] ? ++lookup[letter] : 1;
+  }
+
+  for (let i = 0; i < second.length; i++) {
+    let letter = second[i];
+
+    if (!lookup[letter]) {
+      return false;
+    } else {
+      lookup[letter] -= 1;
+    }
+  }
+  return true;
+};
+
+// Number Algothims
+//*************************************************************************************
 
 // Sliding Windiw Technique
 function arrayMaxConsecutiveSum(arr, num) {
@@ -274,6 +219,7 @@ var majorityElement = function (nums) {
   let max = 0;
   let mj = 0;
   for (let i = 0; i < nums.length; i++) {
+    //obj[nums[i]] = obj[nums[i]] ? ++obj[nums[i]] : 1;
     if (obj[nums[i]] == undefined) {
       obj[nums[i]] = 1;
     } else {
@@ -291,4 +237,112 @@ var majorityElement = function (nums) {
   return mj;
 };
 //136. Single Number
-//Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+//Given a non-empty array of integers nums,
+// every element appears twice except for one. Find that single one.
+var singleNumber = function (nums) {
+  let sorted = nums.sort();
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i] !== sorted[i + 1] && sorted[i] !== sorted[i - 1]) {
+      return sorted[i];
+    }
+  }
+};
+//1342. Number of Steps to Reduce a Number to Zero
+// Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even,
+// you have to divide it by 2, otherwise, you have to subtract 1 from it.Given a non-negative integer num, return the number of steps to reduce it to zero.
+// If the current number is even, you have to divide it by 2,
+//  otherwise, you have to subtract 1 from it.
+// /**
+//  * @param {number} num
+//  * @return {number}
+//  */
+var numberOfSteps = function (num) {
+  let count = 0;
+  while (num !== 0) {
+    if (num % 2 == 0) {
+      num = num / 2;
+      count++;
+    } else {
+      num--;
+      count++;
+    }
+  }
+  return count;
+};
+
+// Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
+//That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+// Return the answer in an array.
+// /**
+//  * @param {number[]} nums
+//  * @return {number[]}
+//  */
+var smallerNumbersThanCurrent = function (nums) {
+  let arr = [];
+  let count = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (nums[i] > nums[j]) count++;
+    }
+    arr[i] = count;
+    count = 0;
+  }
+
+  return arr;
+};
+
+// Given the array candies and the integer extraCandies, where candies[i]
+//  represents the number of candies that the ith kid has.
+
+// For each kid check if there is a way to distribute extraCandies among the kids such that he or
+//  she can have the greatest number of candies among them.
+// Notice that multiple kids can have the greatest number of candies.
+var kidsWithCandies = function (candies, extraCandies) {
+  let max = candies[0];
+  let arr = [];
+
+  for (let i = 1; i < candies.length; i++) {
+    if (candies[i] > max) {
+      max = candies[i];
+    }
+  }
+  for (let j = 0; j < candies.length; j++) {
+    if (candies[j] + extraCandies >= max) {
+      arr.push(true);
+    } else {
+      arr.push(false);
+    }
+  }
+  return arr;
+};
+// Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+// Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+// Input: nums = [2,5,1,3,4,7], n = 3
+// Output: [2,3,5,4,1,7]
+var shuffle = function (nums, n) {
+  let arr = [];
+  for (let i = 0; i < (nums.length - 1) / 2; i++) {
+    arr.push(nums[i]);
+    arr.push(nums[i + n]);
+  }
+  return arr;
+};
+
+// 1480. Running Sum of 1d Array
+// Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+// Return the running sum of nums.
+// Input: nums = [1,2,3,4]
+// Output: [1,3,6,10]
+// Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+
+//  * @param {number[]} nums
+//  * @return {number[]}
+
+var runningSum = function (nums) {
+  let arr = [nums[0]];
+  for (let i = 1; i < nums.length; i++) {
+    arr.push(nums[i] + arr[i - 1]);
+  }
+  return arr;
+};

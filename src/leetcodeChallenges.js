@@ -64,7 +64,7 @@ letterValue = {
   y: 25,
   z: 26,
 };
-
+//387. First Unique Character in a String
 //Given a string s, return the first non-repeating character in it and return its
 // index. If it does not exist, return -1.
 var firstUniqChar = function (s) {
@@ -345,4 +345,22 @@ var runningSum = function (nums) {
     arr.push(nums[i] + arr[i - 1]);
   }
   return arr;
+};
+
+//20. Valid Parentheses
+//Given a string s containing just the characters
+//'(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+var isValid = function (s) {
+  let obj = {
+    '[': ']',
+    '{': '}',
+    '(': ')',
+  };
+  let arr = [];
+  for (let char of s) {
+    if (char === '{' || char === '(' || char === '[') {
+      arr.push(char);
+    } else if (obj[arr.pop()] !== char) return false;
+  }
+  return arr.length ? 0 : 1;
 };

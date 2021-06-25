@@ -364,3 +364,20 @@ var isValid = function (s) {
   }
   return arr.length ? 0 : 1;
 };
+
+//13. Roman to Integer
+//For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II.
+// The number 27 is written as XXVII, which is XX + V + II.
+var romanToInt = function (s) {
+  const roman = { M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1 };
+  let total = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (roman[s[i]] < roman[s[i + 1]]) {
+      total += roman[s[i + 1]] - roman[s[i]];
+      i++;
+    } else {
+      total += roman[s[i]];
+    }
+  }
+  return total;
+};

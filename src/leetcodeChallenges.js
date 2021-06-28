@@ -228,6 +228,25 @@ function arrayMaxConsecutiveSum(arr, num) {
   }
   return max;
 }
+//35. Search Insert Position
+//Given a sorted array of distinct integers and a target value, return the index if the target is found. If not,
+// return the index where it would be if it were inserted in order. Binary Search Tree
+var searchInsert = function (nums, target) {
+  let left = 0;
+  let right = nums.length;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] === target) return mid;
+    else if (nums[mid] < target) left++;
+    else {
+      right--;
+    }
+  }
+
+  return left;
+};
 //169. Majority Element
 //Given an array nums of size n, return the majority element.
 //The majority element is the element that appears more than ⌊n / 2⌋ times.

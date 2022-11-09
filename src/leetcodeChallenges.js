@@ -207,6 +207,11 @@ var longestCommonPrefix = function (strs) {
 // Number Algothims
 //*************************************************************************************
 
+//Flatting Nesting array 
+var flatten = (arrayOfArrays) =>
+    arrayOfArrays.reduce((flattened, item) =>
+        flattened.concat(Array.isArray(item) ? flatten(item) : [item]), []);
+
 // Sliding Windiw Technique
 function arrayMaxConsecutiveSum(arr, num) {
   let sum = 0;

@@ -205,6 +205,32 @@ var isAnagram = function (s, t) {
         }
         return true;
     }
+// A phrase is a palindrome if, after converting all uppercase letters into lowercase letters
+//   and removing all non-alphanumeric characters,
+//   it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+// Given a string s, return true if it is a palindrome, or false otherwise.
+
+// Example 1:
+// Input: s = "A man, a plan, a canal: Panama"
+// Output: true
+// Explanation: "amanaplanacanalpanama" is a palindrome.
+
+var isPalindrome = function(s) {
+    s = s.replace(/[^a-z0-9]/gi, '').toLowerCase();
+
+    let palindrome = true ;
+
+    let i = 0
+    let j = s.length-1
+
+    while(i<j){
+      if(s[i] != s[j]) return false
+       i++
+      j--
+    }
+
+    return palindrome ? true : false
+};
 
 //14.Longest Common Prefix
 //Write a function to find the longest common prefix string

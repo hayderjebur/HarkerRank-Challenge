@@ -279,8 +279,7 @@ const obj = {
 
 function getNames(node) {
   const names = [node.name];
-  const children = node.children || []; 
-  for (const child of children) {
+  for (const child of node.children ) {
     names.push(...getNames(child));
   }
   return names;

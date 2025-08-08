@@ -253,6 +253,23 @@ var longestCommonPrefix = function (strs) {
 
 // Number Algothims
 //*************************************************************************************
+// Count how many nested arrays are in there
+// const input = [1, 2, [1, 2], [[1, 2]]];
+// console.log(countNestedArrays(input)); // Output: 3
+
+function countNestedArrays(arr) {
+  let count = 0;
+
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      count++; // count this child array
+      count += countNestedArrays(item); // count nested arrays inside it
+    }
+  }
+
+  return count;
+}
+
 
 //Flatting Nesting array 
 var flatten = (arrayOfArrays) =>

@@ -253,6 +253,41 @@ var longestCommonPrefix = function (strs) {
 
 // Number Algothims
 //*************************************************************************************
+// How would you return only the name
+const obj = {
+  name: "a",
+  children: [
+    {
+      name: "b",
+      children: [
+        {
+          name: "c",
+          children: [
+            {
+              name: "d",
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "h",
+      children: [],
+    },
+  ]
+
+function getNames(node) {
+  const names = [node.name];
+  const children = node.children || []; 
+  for (const child of children) {
+    names.push(...getNames(child));
+  }
+  return names;
+}
+
+//console.log(getNames(data)); // Output: ["a", "b", "c", "d", "h"]
+
 // Count how many nested arrays are in there
 // const input = [1, 2, [1, 2], [[1, 2]]];
 // console.log(countNestedArrays(input)); // Output: 3
